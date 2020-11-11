@@ -10,14 +10,14 @@ from app.models import User, Userdata
 
 
 #logs in user - DONE
+from workers import hassu
+
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
 
-    loginform = LoginForm()
-    signupform = SignupForm()
-
-    return render_template('index.html', title='Index', loginform=loginform, signupform=signupform)
+    return render_template('index.html', title='Index')
 
 
 #logs out user - DONE
@@ -54,6 +54,14 @@ def newmessage(data):
 
     sid = request.sid
 
+
+    #request for loginmodal
+    if data['event'] == 201:
+        mess = {}
+        mess['event'] = 101
+        mess['htm'] = render_template('loginmodal.html', title='Belépés', loginform = LoginForm())
+        socket.emit('newmessage', mess, room=sid)
+        return True
 
     #incoming request for error message with message - DONE
     if data['event'] == 291:

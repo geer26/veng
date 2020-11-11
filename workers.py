@@ -1,0 +1,3 @@
+
+def hassu():
+    return False

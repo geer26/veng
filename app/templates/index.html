@@ -32,7 +32,39 @@
     <body>
 
         <div id="mainpage" class="noselect">
+
+            <div id="header" class="menubar valign-wrapper">
+
+                {% if not current_user.is_authenticated %}
+                <img src="/static/img/logo.png" class="logo">
+
+                <a class="btn btn-small" onclick="loginmodal()"
+                   style="margin-left: 13vmin; margin-right: 1vmin;" id="loginbutton">
+                    belépés
+                </a>
+
+                vagy
+
+                <a class="waves-effect waves-light btn btn-small amber" style="margin-left: 1vmin;">regisztráció</a>
+
+                {% else %}
+                <a class="waves-effect waves-light btn btn-small red" style="margin-left: 13vmin;">kilépés</a>
+                {% endif %}
+
+            </div>
+
+            <div id="pagecontent" class="">
+
+            {% if current_user.is_authenticated and current_user.is_superuser %}
+            HELLO SUPER!
+            {% elif current_user.is_authenticated and not current_user.is_superuser %}
+            HELLO USER!
+            {% else %}
             HELLO WORLD!
+            {% endif %}
+
+            </div>
+
         </div>
 
     </body>

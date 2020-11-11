@@ -1,0 +1,7 @@
+# server side events
+# 10X - modals
+#   101 - send for loginmodal
+
+# client side events
+# 20X - requests for modals
+#   201 - request for loginmodal

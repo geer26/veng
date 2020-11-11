@@ -39,6 +39,7 @@ class Userdata(db.Model):
     __tablename__ = 'userdata'
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True)
+    photo_path = db.Column(db.String(60))
     fullname = db.Column(db.String(60))
     dob = db.Column(db.DateTime)  #Date Of Birth
     pob = db.Column(db.String(60))  #PlaceOfBirth
