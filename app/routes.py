@@ -23,10 +23,6 @@ def index():
         else:
             remember_me = False
 
-        print(username)
-        print(password)
-        print(remember_me)
-
         user = User.query.filter_by(username=username).first()
 
         if user and user.check_password(password):
@@ -35,11 +31,17 @@ def index():
             db.session.commit()
 
         if user.is_superuser:
-            users = User.query.all()
+            users = User.query.order_by(User.username).all()
             userdata = Userdata.query.all()
             return render_template('index2.html', title='Index', users=users, userdata=userdata)
         else:
             return redirect('/')
+
+    elif current_user.is_authenticated and current_user.is_superuser:
+        users = User.query.order_by(User.username).all()
+        userdata = Userdata.query.all()
+        return render_template('index2.html', title='Index', users=users, userdata=userdata)
+
     else:
         return render_template('index2.html', title='Index')
 
