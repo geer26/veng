@@ -1,1 +1,34 @@
 
+<div class="">
+
+    <div class="carousel carousel-slider center" style="min-height: 85vh;">
+
+        <div class="carousel-item brown darken-3 white-text" style="overflow:auto; border-radius: 2px;">
+            <h2>
+                Users
+                <a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </h2>
+            <p>{% include 'admin_users.html' %}</p>
+        </div>
+
+        <div class="carousel-item blue lighten-2" style="overflow:auto; border-radius: 2px;">
+            <h2> Extras </h2>
+            <p>{% include 'admin_extra.html' %}</p>
+        </div>
+
+    </div>
+
+  <script>
+      var car = $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        //indicators: true,
+        //noWrap: true,
+        //onCycleTo: function(data) {
+        //current_slide = data.id;
+        //when user changes page, current slide id will be stored in current_slide as "uc_XXX", where XXX is the id of the pocket
+        //console.log(current_slide);
+    //}
+    });
+  </script>
+
+</div>
