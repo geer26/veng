@@ -5,11 +5,9 @@ from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy import desc
 
 from app import app, socket, db
-from app.forms import LoginForm, SignupForm
+from app.forms import LoginForm
 from app.models import User, Userdata
 
-
-#logs in user - DONE
 from workers import hassu
 
 
@@ -36,7 +34,12 @@ def index():
             user.last_activity = datetime.now()
             db.session.commit()
 
-        return redirect('/')
+        if user.is_superuser:
+            users = User.query.all()
+            userdata = Userdata.query.all()
+            return render_template('index2.html', title='Index', users=users, userdata=userdata)
+        else:
+            return redirect('/')
     else:
         return render_template('index2.html', title='Index')
 

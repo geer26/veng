@@ -20,6 +20,9 @@ socket.on('newmessage', function(data){
     }
 });
 
+
+//--------------------- common ops -----------------------
+
 function loginmodal(){
     var data = {event: 201};
     send_message('newmessage', data);
@@ -37,3 +40,10 @@ function loginattempt(form){
     console.log(form);
     $('#'+form.toString()).submit();
 }
+
+
+// ------------------ admin ops ----------------------
+
+function admin_proba(){
+    console.log('HI THERE!');
+};
