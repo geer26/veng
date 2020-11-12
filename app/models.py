@@ -20,8 +20,8 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(256))
     is_superuser = db.Column(db.Boolean, default=False)
-    last_activity = db.Column(db.DateTime)
-    userdata= db.relationship('userdata', backref='_user', cascade = 'all,delete')
+    userdata = db.Column(db.Integer, db.ForeignKey('userdata.id'))
+    userdata= db.relationship('Userdata', backref='_user', cascade = 'all,delete')
 
     def __repr__(self):
         return self.username
@@ -38,7 +38,7 @@ class User(UserMixin,db.Model):
 class Userdata(db.Model):
     __tablename__ = 'userdata'
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
     photo_path = db.Column(db.String(60))
     fullname = db.Column(db.String(60))
     dob = db.Column(db.DateTime)  #Date Of Birth

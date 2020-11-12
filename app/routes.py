@@ -16,8 +16,29 @@ from workers import hassu
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST' and not current_user.is_authenticated:
 
-    return render_template('index.html', title='Index')
+        username = request.form['username']
+        password = request.form['password']
+        if request.form['remember_me'] == 'y':
+            remember_me = True
+        else:
+            remember_me = False
+
+        print(username)
+        print(password)
+        print(remember_me)
+
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.check_password(password):
+            login_user(user, remember_me)
+            user.last_activity = datetime.now()
+            db.session.commit()
+
+        return redirect('/')
+    else:
+        return render_template('index2.html', title='Index')
 
 
 #logs out user - DONE
@@ -36,15 +57,19 @@ def logout():
 def addsu(suname, password):
     #eg. https://example.com/examplesuname/example1Password!2
     if not hassu():
+
         user = User()
+
         user.username = suname
         user.email = 'none@none.no'
         user.set_password(password)
         user.is_superuser = True
         user.joined = date.today()
         user.last_activity = datetime.now()
+
         db.session.add(user)
         db.session.commit()
+
     return redirect('/')
 
 
@@ -57,9 +82,10 @@ def newmessage(data):
 
     #request for loginmodal
     if data['event'] == 201:
+        loginform = LoginForm()
         mess = {}
         mess['event'] = 101
-        mess['htm'] = render_template('loginmodal.html', title='Belépés', loginform = LoginForm())
+        mess['htm'] = render_template('loginmodal.html', title='Belépés', loginform = loginform)
         socket.emit('newmessage', mess, room=sid)
         return True
 

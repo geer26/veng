@@ -13,7 +13,7 @@ socket.on('newmessage', function(data){
 
         //incoming login modal!
         case 101:{
-            $('#pagecontent').append(data['htm']);
+            $('#mainpage').append(data['htm']);
             }
             break;
 
@@ -23,4 +23,17 @@ socket.on('newmessage', function(data){
 function loginmodal(){
     var data = {event: 201};
     send_message('newmessage', data);
+    return;
 };
+
+
+function closemodal(element){
+    $( "#"+element.toString()).remove();
+    return;
+};
+
+
+function loginattempt(form){
+    console.log(form);
+    $('#'+form.toString()).submit();
+}
