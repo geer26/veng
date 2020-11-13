@@ -98,14 +98,15 @@ def newmessage(data):
     #loginattempt
     if data['event'] == 221:
         if canlogin(data):
+            print('canlogin')
             mess = {}
             mess['event'] = 121
             socket.emit('newmessage', mess, room=sid)
         else:
+            print('cant login')
             mess = {}
             mess['event'] = 109
-            #TODO create errormodal
-            mess['htm'] = '???'
+            mess['htm'] = render_template('errormessage.html', message='Rossz felhasználónév vagy jelszó!')
             socket.emit('newmessage', mess, room=sid)
         return True
 

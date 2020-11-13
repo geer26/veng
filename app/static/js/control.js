@@ -17,6 +17,13 @@ socket.on('newmessage', function(data){
             break;
 
 
+        //error message!
+        case 109:{
+            $('#mainpage').append(data['htm']);
+            }
+            break;
+
+
         //login data are OK, submit the form
         case 121:{
             $('#loginform').submit();
