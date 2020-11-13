@@ -1,7 +1,17 @@
-# server side events
+#---------------server side events --------------------
+<------------------------------------------------>
 # 10X - modals
 #   101 - send for loginmodal
+#   109 - sending an errormodal
+<------------------------------------------------>
+# 12X - login and signup operations
+#   121 - login ok, submit the form!
 
-# client side events
+#----------------client side events----------------------
+<------------------------------------------------>
 # 20X - requests for modals
 #   201 - request for loginmodal
+#   209 - request for error modal with message text
+<------------------------------------------------>
+# 22X - login and signup operations
+#   221 - loginattempt

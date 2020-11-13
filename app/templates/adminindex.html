@@ -1,7 +1,17 @@
 
 <div class="">
 
-    <div class="carousel carousel-slider center" style="min-height: 85vh;">
+    <div class="carousel carousel-slider center" style="min-height: 85vh;" id="admincarousel">
+
+        <div id="prevslide" style="left: 0; border-top-right-radius: 5px; border-bottom-right-radius: 5px;"
+            onclick="uc_prev()" class="valign-wrapper car_nav">
+            <i class="material-icons small navicon">skip_previous</i>
+        </div>
+
+        <div id="nextslide" style="right: 0; border-top-left-radius: 5px; border-bottom-left-radius: 5px;"
+            onclick="uc_next()" class="valign-wrapper car_nav">
+            <i class="material-icons small navicon">skip_next</i>
+        </div>
 
         <div class="carousel-item brown darken-3 white-text" style="overflow:auto; border-radius: 2px;">
             <h2>

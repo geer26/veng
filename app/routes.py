@@ -8,7 +8,7 @@ from app import app, socket, db
 from app.forms import LoginForm
 from app.models import User, Userdata
 
-from workers import hassu
+from workers import hassu, canlogin
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -93,6 +93,22 @@ def newmessage(data):
         mess['htm'] = render_template('loginmodal.html', title='Belépés', loginform = loginform)
         socket.emit('newmessage', mess, room=sid)
         return True
+
+
+    #loginattempt
+    if data['event'] == 221:
+        if canlogin(data):
+            mess = {}
+            mess['event'] = 121
+            socket.emit('newmessage', mess, room=sid)
+        else:
+            mess = {}
+            mess['event'] = 109
+            #TODO create errormodal
+            mess['htm'] = '???'
+            socket.emit('newmessage', mess, room=sid)
+        return True
+
 
     #incoming request for error message with message - DONE
     if data['event'] == 291:

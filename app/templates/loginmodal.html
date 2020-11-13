@@ -11,29 +11,29 @@
             <ul>
 
                 <li>
-                <div class="input-field center-align">
+                <div class="input-field center-align amber-text">
                     <i class="material-icons prefix">account_circle</i>
                     <!-- <input id="login_username" type="text" class="validate"> -->
                     {{loginform.username( id="login_username" )}}
-                    <label for="login_username">username</label>
+                    <label for="login_username" class="amber-text">username</label>
                 </div>
             </li>
 
                 <li>
-                <div class="input-field center-align">
+                <div class="input-field center-align amber-text">
                     <i class="material-icons prefix">pending</i>
                     <!-- <input id="login_password" type="password" class="validate"> -->
                     {{loginform.password(id="login_password" )}}
-                    <label for="login_password">password</label>
+                    <label for="login_password" class="amber-text">password</label>
                 </div>
             </li>
 
                 <li>
-                <p class="center-align">
+                <p class="center-align amber-text">
                 <label>
                     <!-- <input type="checkbox" id="input_remember"/> -->
-                    {{ loginform.remember_me(id="input_remember", type="checkbox") }}
-                    <span>remember me!</span>
+                    {{ loginform.remember_me(id="input_remember", type="checkbox", class="amber-text") }}
+                    <span class="amber-text">remember me!</span>
                 </label>
                 </p>
             </li>
@@ -42,7 +42,7 @@
 
         </form>
 
-        <button class="waves-effect waves-light btn btn-small" style="border-radius: 2px;" id="loginbutton" onclick="loginattempt('loginform')">
+        <button class="waves-effect waves-light btn btn-small" style="border-radius: 2px;" id="loginbutton" onclick="try_login()">
             login
         </button>
 
