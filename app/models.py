@@ -14,10 +14,9 @@ def load_user(id):
 
 
 class User(UserMixin,db.Model):
-    __tablename__ = 'u'
+    #__tablename__ = 'u'
     id = db.Column(db.Integer, primary_key=True)
-    userdata_id = db.Column(db.Integer, db.ForeignKey('userdata.id'))
-    userdata = db.relationship('Userdata', backref='_user', cascade='all,delete')
+    userdata = db.relationship('Userdata', backref='_user', cascade='all,delete', uselist=False)
 
     uuid = db.Column(db.String(12), index=True)
     username = db.Column(db.String(12), index=True, unique=True)
@@ -39,8 +38,9 @@ class User(UserMixin,db.Model):
 
 
 class Userdata(db.Model):
-    __tablename__ = 'udata'
+    #__tablename__ = 'udata'
     id = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     photo_path = db.Column(db.String(60))
     fullname = db.Column(db.String(60))

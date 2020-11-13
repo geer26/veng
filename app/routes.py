@@ -16,37 +16,37 @@ from workers import hassu, canlogin, generate_rnd
 def index():
     if request.method == 'POST' and not current_user.is_authenticated:
 
-        username = request.form['username']
-        password = request.form['password']
-        if request.form['remember_me'] == 'y':
+        username = str(request.form['username'])
+        password = str(request.form['password'])
+        if request.form['remember_me']:
             remember_me = True
         else:
             remember_me = False
 
-        user = User.query.filter_by(username=username).first()
+        u = User.query.filter_by(username=username).first()
 
-        if user and user.check_password(password):
-            login_user(user, remember_me)
-            user.last_activity = datetime.now()
+        if u and u.check_password(password):
+            login_user(u, remember_me)
+            u.last_activity = datetime.now()
             db.session.commit()
 
-        if user.is_superuser:
+        if u.is_superuser:
             users = User.query.order_by(User.username).all()
-            userdata = Userdata.query.all()
-            return render_template('index2.html', title='Index', users=users, userdata=userdata)
+            return render_template('index2.html', title='Index', users=users)
+
         else:
             return redirect('/')
 
     elif current_user.is_authenticated and current_user.is_superuser:
         users = User.query.order_by(User.username).all()
-        userdata = Userdata.query.all()
+        #userdata = Userdata.query.all()
 
-        for user in users:
+        '''for user in users:
             print('USERNAME: ', user.username)
-            print('FULLNAME: ', user.userdata)
-            print('ADDRESS: ', user.userdata)
+            print('FULLNAME: ', user.userdata.fullname)
+            print('ADDRESS: ', user.userdata.address)'''
 
-        return render_template('index2.html', title='Index', users=users, userdata=userdata)
+        return render_template('index2.html', title='Index', users=users)
 
     else:
         return render_template('index2.html', title='Index')
@@ -78,7 +78,7 @@ def addsu(suname, password):
         user.joined = date.today()
         user.last_activity = datetime.now()
 
-        userdata=Userdata(_user=user)
+        userdata = Userdata(userid=user.id)
 
         userdata.photo_path = '/static/img/avatars/adminavatar.png'
         userdata.fullname = generate_rnd(12)
@@ -88,7 +88,6 @@ def addsu(suname, password):
         userdata.mmn = generate_rnd(12)
 
         db.session.add(user)
-        db.session.add(userdata)
         db.session.commit()
 
     return redirect('/')
