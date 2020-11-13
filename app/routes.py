@@ -119,3 +119,15 @@ def newmessage(data):
             socket.emit('newmessage', mess, room=sid)
         return True
 
+
+#-------------------------------------------- dev ops --------------------------------------
+
+
+    #request for avatarselector
+    if data['event'] == 401 and current_user.is_superuser:
+        mess = {}
+        mess['event'] = 301
+        mess['htm'] = render_template('avatars.html')
+        socket.emit('newmessage', mess, room=sid)
+        return True
+

@@ -16,6 +16,7 @@ def load_user(id):
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    uuid = db.Column(db.String(12), index=True)
     username = db.Column(db.String(12), index=True, unique=True)
     email = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(256))
@@ -34,6 +35,7 @@ class User(UserMixin,db.Model):
 
     def compare_passwords(self, password1, password2):
         return generate_password_hash(password1) == generate_password_hash(password2)
+
 
 class Userdata(db.Model):
     __tablename__ = 'userdata'
@@ -54,41 +56,3 @@ class Userdata(db.Model):
 
     def __repr__(self):
         return str(self.fullname)
-
-'''class Pocket(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40))
-    description = db.Column(db.String(120), default='')
-    balance = db.Column(db.Integer, default=0)
-    last_change = db.Column(db.DateTime, index=True, default=datetime.now)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    transfers = db.relationship('Transfer', backref = '_pocket', cascade = 'all,delete')
-
-    def __repr__(self):
-        return str(self.id)+'_'+str(self.name)
-
-
-class Transfer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Integer, default=0)
-    detail = db.Column(db.String(40))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.now)
-    pocket = db.Column(db.Integer, db.ForeignKey('pocket.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-
-    def __repr__(self):
-        return str(self.id)+'_'+str(self.amount)
-
-
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40))
-    type = db.Column(db.Integer, default=1)
-    hidden = db.Column(db.Boolean, default=False)
-    last_active = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # THINK OF CASCADING!!!
-    transfer = db.relationship('Transfer', backref='_category')
-
-    def __repr__(self):
-        return self.name'''

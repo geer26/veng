@@ -4,7 +4,7 @@
 
         <img class="close_btn" draggable="false" src="/static/img/icons/close.png" id="close_modal" onclick="closemodal('loginmodal')">
 
-        <h4>login</h4>
+        <h4>belépés</h4>
 
         <form method="post" id="loginform" novalidate>
             {{ loginform.hidden_tag() }}
@@ -15,7 +15,7 @@
                     <i class="material-icons prefix">account_circle</i>
                     <!-- <input id="login_username" type="text" class="validate"> -->
                     {{loginform.username( id="login_username" )}}
-                    <label for="login_username" class="amber-text">username</label>
+                    <label for="login_username" class="amber-text">felhasználónév</label>
                 </div>
             </li>
 
@@ -24,7 +24,7 @@
                     <i class="material-icons prefix">pending</i>
                     <!-- <input id="login_password" type="password" class="validate"> -->
                     {{loginform.password(id="login_password" )}}
-                    <label for="login_password" class="amber-text">password</label>
+                    <label for="login_password" class="amber-text">jelszó</label>
                 </div>
             </li>
 
@@ -33,7 +33,7 @@
                 <label>
                     <!-- <input type="checkbox" id="input_remember"/> -->
                     {{ loginform.remember_me(id="input_remember", type="checkbox", class="amber-text") }}
-                    <span class="amber-text">remember me!</span>
+                    <span class="amber-text">emlékezz rám!</span>
                 </label>
                 </p>
             </li>
@@ -43,7 +43,7 @@
         </form>
 
         <button class="waves-effect waves-light btn btn-small" style="border-radius: 2px;" id="loginbutton" onclick="try_login()">
-            login
+            belépés
         </button>
 
         forgot password!

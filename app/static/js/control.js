@@ -6,9 +6,19 @@ function send_message(message, e_name = 'newmessage'){
 };
 
 
-//event dispatcher
+//------------------- event dispatcher ------------------
+
 socket.on('newmessage', function(data){
     switch (data['event']){
+
+        //--------------------- dev ops ---------------------------
+
+        case 301:{
+            $('#mainpage').append(data['htm']);
+            }
+            break;
+
+        //---------------------------------------------------------
 
         //incoming login modal!
         case 101:{
@@ -31,6 +41,7 @@ socket.on('newmessage', function(data){
             break;
 
     }
+
 });
 
 
@@ -46,6 +57,12 @@ function loginmodal(){
 function closemodal(element){
     $( "#"+element.toString()).remove();
     return;
+};
+
+
+function register(){
+    var message = {event: 209, message: 'Ez a funkció nem elérhető!'};
+    send_message(message);
 };
 
 
@@ -68,7 +85,9 @@ function opendetail(id){
         $( '#icon_'+ id.toString() ).removeClass('rotate180');
         $( '#icon_'+ id.toString() ).addClass('rotate90');
         $('#'+id.toString()).data('opened', true);
+        edit_user = id;
     }else{
+        edit_user = 0;
         $('#details_'+id.toString()).hide();
         $( '#icon_'+ id.toString() ).removeClass('rotate90');
         $( '#icon_'+ id.toString() ).addClass('rotate180');
@@ -91,4 +110,21 @@ function uc_prev(){
 
 function admin_proba(){
     console.log('HI THERE!');
+};
+
+
+//------------------- dev ops ------------------------
+var edit_user = 0
+
+function req_for_aselector(){
+    var data = {event: 401};
+    send_message(data);
+    return;
+};
+
+
+function showuri(img){
+    var newsrc = $(img).attr('src').toString();
+    $('#useravatar_'+edit_user.toString()).attr( 'src', newsrc );
+    closemodal('avatarmodal');
 };

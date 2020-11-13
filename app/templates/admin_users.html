@@ -1,12 +1,12 @@
 
-<table class="highlight" style="max-width: 95%; margin: auto;">
+<table class="highlight" style="max-width: 95%; margin: auto; color: #ffc107;">
     <thead style="text-align: center;">
         <tr>
             <th>ID</th>
-            <th>Username</th>
-            <th>email</th>
-            <th>Joined</th>
-            <th>Last active</th>
+            <th>Felhasználónév</th>
+            <th>Email</th>
+            <th>Csatlakozás dátuma</th>
+            <th>Utoljára aktív</th>
         </tr>
     </thead>
 
@@ -40,8 +40,28 @@
 
         <tr id="details_{{user.id}}" style="display: none;">
             <td colspan=5>
-                <div style="width: 100%; border: 1px solid white;, height: 20px; display: inline-block;">
-                    <p>Teljes név: {{user.userdata.fullname}}</p>
+                <div style="width: 100%; border: 1px solid white; display: inline-block;">
+
+                    <p>
+                        <img style="width: 8vw; height: 8vw; position: relative; left: 5px; border-radius: 5px;"
+                             {% if  user.userdata.photo_path %}
+                             src="{{user.userdata.photo_path}}"
+                             {% else %}
+                             src="/static/img/avatars/a_unknown.png"
+                             {% endif %}
+                             onclick="req_for_aselector()" id="useravatar_{{user.id}}">
+
+                        <a id="avatarsrc" style="display: none;">{{user.userdata.photo_path}}</a>
+                    </p>
+
+                    <p>
+                        Teljes név: {{user.userdata.fullname}}
+                    </p>
+
+                    <p>
+                        Születési idő: {{user.userdata.dob}}
+                    </p>
+
                 </div>
             </td>
         </tr>

@@ -13,15 +13,16 @@
             <i class="material-icons small navicon">skip_next</i>
         </div>
 
-        <div class="carousel-item brown darken-3 white-text" style="overflow:auto; border-radius: 2px;">
+        <div id="users" class="carousel-item brown darken-3 white-text" style="overflow-x: scroll; border-radius: 2px; color: #ffc107;">
             <h2>
-                Users
-                <a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <p style="color: #ffc107;">Felhasználók
+                <a class="btn-floating btn-small waves-effect waves-light green darken-2"><i class="material-icons">add</i></a>
+                </p>
             </h2>
-            <p>{% include 'admin_users.html' %}</p>
+            <p id="table_users">{% include 'admin_users.html' %}</p>
         </div>
 
-        <div class="carousel-item blue lighten-2" style="overflow:auto; border-radius: 2px;">
+        <div class="carousel-item green darken-2" style="overflow:auto; border-radius: 2px;">
             <h2> Extras </h2>
             <p>{% include 'admin_extra.html' %}</p>
         </div>

@@ -43,13 +43,19 @@
 
                 vagy
 
-                <a class="waves-effect waves-light btn btn-small amber" style="margin-left: 1vmin;">regisztráció</a>
+                <a class="waves-effect waves-light btn btn-small amber" style="margin-left: 1vmin;" onclick="register()">
+                    regisztráció
+                </a>
 
                 {% else %}
                 <img src="/static/img/logo.png" class="logo">
-                <a class="waves-effect waves-light btn btn-small red" style="margin-left: 13vmin;" href="/logout">kilépés</a>
+                <a class="waves-effect waves-light btn btn-small red" style="margin-left: 13vmin;" href="/logout">
+                    kilépés
+                </a>
                 {% if current_user.is_superuser %}
-                <a class="btn btn-small" onclick="admin_proba()" id="try">klikkelj rám!</a>
+                <a class="btn btn-small" onclick="admin_proba()" id="try">
+                    klikkelj rám!
+                </a>
                 {% endif %}
                 {% endif %}
 

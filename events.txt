@@ -15,3 +15,9 @@
 <------------------------------------------------>
 # 22X - login and signup operations
 #   221 - loginattempt
+
+#------------------ dev events --------------------------
+<------------------------------------------------>
+#3XX-4XX Server-Client
+#   401 - request for avatarseletor modal
+#   301 - sending avatarselector modal
