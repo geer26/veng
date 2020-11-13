@@ -85,8 +85,8 @@ def newmessage(data):
     sid = request.sid
 
 
-    #request for loginmodal
-    if data['event'] == 201:
+    #request for loginmodal - DONE
+    if data['event'] == 201 and not current_user.is_authenticated:
         loginform = LoginForm()
         mess = {}
         mess['event'] = 101
@@ -95,8 +95,17 @@ def newmessage(data):
         return True
 
 
-    #loginattempt
-    if data['event'] == 221:
+    #request for error modal
+    if data['event'] == 209:
+        mess = {}
+        mess['event'] = 109
+        mess['htm'] = render_template('errormessage.html', message=data['message'])
+        socket.emit('newmessage', mess, room=sid)
+        return True
+
+
+    #loginattempt - DONE
+    if data['event'] == 221 and not current_user.is_authenticated:
         if canlogin(data):
             print('canlogin')
             mess = {}
@@ -110,11 +119,3 @@ def newmessage(data):
             socket.emit('newmessage', mess, room=sid)
         return True
 
-
-    #incoming request for error message with message - DONE
-    if data['event'] == 291:
-        mess = {}
-        mess['event'] = 191
-        mess['htm'] = render_template('errormessage.html', message=data['message'])
-        socket.emit('newmessage', mess, room=sid)
-        return True

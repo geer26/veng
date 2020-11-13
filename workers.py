@@ -7,7 +7,7 @@ def hassu():
 def canlogin(data):
     username = str(data['username'])
     password = str(data['password'])
-    u = User.query.filter_by(username=username).all()
+    u = User.query.filter_by(username=username).first()
     if not u: return False
     if not u.check_password(password): return False
     return True
