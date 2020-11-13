@@ -135,3 +135,11 @@ def newmessage(data):
         socket.emit('newmessage', mess, room=sid)
         return True
 
+
+    #request for adduser modal
+    if data['event'] == 402 and current_user.is_superuser:
+        mess = {}
+        mess['event'] = 302
+        mess['htm'] = render_template('adduser_modal.html')
+        socket.emit('newmessage', mess, room=sid)
+        return True

@@ -18,6 +18,14 @@ socket.on('newmessage', function(data){
             }
             break;
 
+
+        //adduser modal!
+        case 302:{
+            $('#mainpage').append(data['htm']);
+            };
+            break;
+
+
         //---------------------------------------------------------
 
         //incoming login modal!
@@ -121,6 +129,8 @@ function admin_proba(){
 
 
 function req_for_addumodal(){
+    var message = {event: 402};
+    send_message(message);
 };
 
 

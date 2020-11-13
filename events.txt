@@ -20,4 +20,6 @@
 <------------------------------------------------>
 #3XX-4XX Server-Client
 #   401 - request for avatarseletor modal
+#   402 - request for adduser modal
 #   301 - sending avatarselector modal
+#   302 - sending adduser modal
