@@ -60,9 +60,9 @@
             {% if current_user.is_authenticated and current_user.is_superuser %}
                 {% include 'adminindex.html' %}
             {% elif current_user.is_authenticated and not current_user.is_superuser %}
-            HELLO USER!
+                {% include 'auth_index.html' %}
             {% else %}
-            HELLO WORLD!
+                {% include 'nonauth_index.html' %}
             {% endif %}
 
             </div>
