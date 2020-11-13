@@ -8,8 +8,6 @@ def hassu():
     return False
 
 def canlogin(data):
-    for i in range(10):
-        print(generate_rnd(12))
     username = str(data['username'])
     password = str(data['password'])
     u = User.query.filter_by(username=username).first()

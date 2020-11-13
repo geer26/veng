@@ -8,7 +8,7 @@ from app import app, socket, db
 from app.forms import LoginForm
 from app.models import User, Userdata
 
-from workers import hassu, canlogin
+from workers import hassu, canlogin, generate_rnd
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -40,6 +40,12 @@ def index():
     elif current_user.is_authenticated and current_user.is_superuser:
         users = User.query.order_by(User.username).all()
         userdata = Userdata.query.all()
+
+        for user in users:
+            print('USERNAME: ', user.username)
+            print('FULLNAME: ', user.userdata)
+            print('ADDRESS: ', user.userdata)
+
         return render_template('index2.html', title='Index', users=users, userdata=userdata)
 
     else:
@@ -66,13 +72,23 @@ def addsu(suname, password):
         user = User()
 
         user.username = suname
-        user.email = 'none@none.no'
+        user.email = generate_rnd(12)
         user.set_password(password)
         user.is_superuser = True
         user.joined = date.today()
         user.last_activity = datetime.now()
 
+        userdata=Userdata(_user=user)
+
+        userdata.photo_path = '/static/img/avatars/adminavatar.png'
+        userdata.fullname = generate_rnd(12)
+        userdata.joined = datetime.now()
+        userdata.address = generate_rnd(12)
+        userdata.user=user.id
+        userdata.mmn = generate_rnd(12)
+
         db.session.add(user)
+        db.session.add(userdata)
         db.session.commit()
 
     return redirect('/')
@@ -107,12 +123,10 @@ def newmessage(data):
     #loginattempt - DONE
     if data['event'] == 221 and not current_user.is_authenticated:
         if canlogin(data):
-            print('canlogin')
             mess = {}
             mess['event'] = 121
             socket.emit('newmessage', mess, room=sid)
         else:
-            print('cant login')
             mess = {}
             mess['event'] = 109
             mess['htm'] = render_template('errormessage.html', message='Rossz felhasználónév vagy jelszó!')

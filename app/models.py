@@ -14,15 +14,16 @@ def load_user(id):
 
 
 class User(UserMixin,db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'u'
     id = db.Column(db.Integer, primary_key=True)
+    userdata_id = db.Column(db.Integer, db.ForeignKey('userdata.id'))
+    userdata = db.relationship('Userdata', backref='_user', cascade='all,delete')
+
     uuid = db.Column(db.String(12), index=True)
     username = db.Column(db.String(12), index=True, unique=True)
     email = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(256))
     is_superuser = db.Column(db.Boolean, default=False)
-    userdata = db.Column(db.Integer, db.ForeignKey('userdata.id'))
-    userdata= db.relationship('Userdata', backref='_user', cascade = 'all,delete')
 
     def __repr__(self):
         return self.username
@@ -38,14 +39,14 @@ class User(UserMixin,db.Model):
 
 
 class Userdata(db.Model):
-    __tablename__ = 'userdata'
+    __tablename__ = 'udata'
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+
     photo_path = db.Column(db.String(60))
     fullname = db.Column(db.String(60))
     dob = db.Column(db.DateTime)  #Date Of Birth
     pob = db.Column(db.String(60))  #PlaceOfBirth
-    joined = db.Column(db.DateTime)
+    joined = db.Column(db.DateTime, default=datetime.now())
     association = db.Column(db.String(60))
     license_no = db.Column(db.String(60))
     gender = db.Column(db.Integer)
