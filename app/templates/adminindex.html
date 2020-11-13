@@ -1,7 +1,7 @@
 
 <div class="">
 
-    <div class="carousel carousel-slider center" style="max-height: 85vh; border: 2px solid blue;" id="admincarousel">
+    <div class="carousel carousel-slider center" style="max-height: 85vh; border: 2px solid blue; overflow: auto;" id="admincarousel">
 
         <div id="prevslide" style="left: 0; border-top-right-radius: 5px; border-bottom-right-radius: 5px;"
             onclick="uc_prev()" class="valign-wrapper car_nav">
@@ -16,7 +16,10 @@
         <div id="users" class="carousel-item brown darken-3" style="max-height: 100%;">
             <h2>
                 <p style="color: #ffc107;">Felhasználók
-                <a class="btn-floating btn-small waves-effect waves-light green darken-2"><i class="material-icons">add</i></a>
+                <a class="btn-floating btn-small waves-effect waves-light green darken-2"
+                onclick="req_for_addumodal()">
+                    <i class="material-icons">add</i>
+                </a>
                 </p>
             </h2>
             <p id="table_users">{% include 'admin_users.html' %}</p>

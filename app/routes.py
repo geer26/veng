@@ -16,8 +16,6 @@ from workers import hassu, canlogin, generate_rnd
 def index():
     if request.method == 'POST' and not current_user.is_authenticated:
 
-        print(request.form)
-
         username = str(request.form['username'])
         password = str(request.form['password'])
         if request.form['remember_me'] and request.form['remember_me'] == 'y':

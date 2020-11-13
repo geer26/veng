@@ -81,6 +81,13 @@ function loginattempt(form){
 
 function opendetail(id){
     if ( !$('#'+id.toString()).data('opened') ){
+
+        if (edit_user != 0){
+            $('#details_'+edit_user.toString()).hide();
+            $( '#icon_'+ edit_user.toString() ).removeClass('rotate90');
+            $( '#icon_'+ edit_user.toString() ).addClass('rotate180');
+        };
+
         $('#details_'+ id.toString()).show();
         $( '#icon_'+ id.toString() ).removeClass('rotate180');
         $( '#icon_'+ id.toString() ).addClass('rotate90');
@@ -110,6 +117,10 @@ function uc_prev(){
 
 function admin_proba(){
     console.log('HI THERE!');
+};
+
+
+function req_for_addumodal(){
 };
 
 
