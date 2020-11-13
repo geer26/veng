@@ -1,5 +1,5 @@
 
-<table class="highlight" style="max-width: 95%; margin: auto; color: #ffc107; max-height: 100%;">
+<table class="highlight " style="max-width: 95%; margin: auto; color: #ffc107;">
     <thead style="text-align: center;">
         <tr>
             <th>ID</th>
@@ -22,12 +22,17 @@
             </td>
 
             <td>
+                <div class="valign-wrapper">
+                {% if user.is_superuser %}
+                <i class="tiny material-icons">psychology</i>
+                {% endif %}
                 {{user.username}}
                 {%if not user.is_superuser or user.username != current_user.username%}
-                <a class="btn-floating btn-small waves-effect waves-light red" onclick="deluser(this)">
-                    <i class="small material-icons">delete</i>
+                <a class="btn-floating btn-small waves-effect waves-light red " onclick="deluser(this)">
+                    <i class="tiny material-icons">delete</i>
                 </a>
                 {%endif%}
+                </div>
             </td>
 
             <td>{{user.email}}</td>
@@ -44,23 +49,22 @@
 
                     <p>
                         <img style="width: 8vw; height: 8vw; position: relative; left: 5px; border-radius: 5px;"
-                             {% if  user.userdata.photo_path %}
-                             src="{{user._userdata.photo_path}}"
+                             {% if  user.photo_path or user.photo_path != ''%}
+                             src="{{user.photo_path}}"
                              {% else %}
                              src="/static/img/avatars/a_unknown.png"
                              {% endif %}
                              onclick="req_for_aselector()" id="useravatar_{{user.id}}">
 
-                        <a id="avatarsrc" style="display: none;">{{user.userdata.photo_path}}</a>
+                        <a id="avatarsrc" style="display: none;">{{user.photo_path}}</a>
                     </p>
 
                     <p>
-                        {{user.userdata}}
-                        Teljes név:
+                        Teljes név: {{user.fullname}}
                     </p>
 
                     <p>
-                        Lakcím:
+                        Lakcím: {{user.address}}
                     </p>
 
                     <p>

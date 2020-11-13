@@ -6,7 +6,7 @@ from sqlalchemy import desc
 
 from app import app, socket, db
 from app.forms import LoginForm
-from app.models import User, Userdata
+from app.models import User
 
 from workers import hassu, canlogin, generate_rnd
 
@@ -16,9 +16,11 @@ from workers import hassu, canlogin, generate_rnd
 def index():
     if request.method == 'POST' and not current_user.is_authenticated:
 
+        print(request.form)
+
         username = str(request.form['username'])
         password = str(request.form['password'])
-        if request.form['remember_me']:
+        if request.form['remember_me'] and request.form['remember_me'] == 'y':
             remember_me = True
         else:
             remember_me = False
@@ -39,12 +41,6 @@ def index():
 
     elif current_user.is_authenticated and current_user.is_superuser:
         users = User.query.order_by(User.username).all()
-        #userdata = Userdata.query.all()
-
-        '''for user in users:
-            print('USERNAME: ', user.username)
-            print('FULLNAME: ', user.userdata.fullname)
-            print('ADDRESS: ', user.userdata.address)'''
 
         return render_template('index2.html', title='Index', users=users)
 
@@ -77,15 +73,12 @@ def addsu(suname, password):
         user.is_superuser = True
         user.joined = date.today()
         user.last_activity = datetime.now()
+        user.fullname = generate_rnd(12)
+        user.address = generate_rnd(12)
+        user.association = generate_rnd(12)
+        user.mmn = generate_rnd(12)
+        user.photo_path = '/static/img/avatars/adminavatar.png'
 
-        userdata = Userdata(userid=user.id)
-
-        userdata.photo_path = '/static/img/avatars/adminavatar.png'
-        userdata.fullname = generate_rnd(12)
-        userdata.joined = datetime.now()
-        userdata.address = generate_rnd(12)
-        userdata.user=user.id
-        userdata.mmn = generate_rnd(12)
 
         db.session.add(user)
         db.session.commit()

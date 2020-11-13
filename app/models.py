@@ -16,13 +16,28 @@ def load_user(id):
 class User(UserMixin,db.Model):
     #__tablename__ = 'u'
     id = db.Column(db.Integer, primary_key=True)
-    userdata = db.relationship('Userdata', backref='_user', cascade='all,delete', uselist=False)
 
+    #login and register
     uuid = db.Column(db.String(12), index=True)
     username = db.Column(db.String(12), index=True, unique=True)
     email = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(256))
     is_superuser = db.Column(db.Boolean, default=False)
+
+    # detailed
+    photo_path = db.Column(db.String(60))
+    fullname = db.Column(db.String(60))
+    dob = db.Column(db.DateTime)  # Date Of Birth
+    pob = db.Column(db.String(60))  # PlaceOfBirth
+    joined = db.Column(db.DateTime, default=datetime.now())
+    association = db.Column(db.String(60))
+    license_no = db.Column(db.String(60))
+    gender = db.Column(db.Integer)
+    mmn = db.Column(db.String(60))  # MothersMaidenNAme
+    address = db.Column(db.String(120))
+    phone_no = db.Column(db.String(25))
+    lic_type = db.Column(db.Integer)
+
 
     def __repr__(self):
         return self.username
@@ -35,25 +50,3 @@ class User(UserMixin,db.Model):
 
     def compare_passwords(self, password1, password2):
         return generate_password_hash(password1) == generate_password_hash(password2)
-
-
-class Userdata(db.Model):
-    #__tablename__ = 'udata'
-    id = db.Column(db.Integer, primary_key=True)
-    userid = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    photo_path = db.Column(db.String(60))
-    fullname = db.Column(db.String(60))
-    dob = db.Column(db.DateTime)  #Date Of Birth
-    pob = db.Column(db.String(60))  #PlaceOfBirth
-    joined = db.Column(db.DateTime, default=datetime.now())
-    association = db.Column(db.String(60))
-    license_no = db.Column(db.String(60))
-    gender = db.Column(db.Integer)
-    mmn = db.Column(db.String(60)) #MothersMaidenNAme
-    address = db.Column(db.String(120))
-    phone_no = db.Column(db.String(25))
-    lic_type = db.Column(db.Integer)
-
-    def __repr__(self):
-        return str(self.fullname)

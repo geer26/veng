@@ -23,6 +23,7 @@ body{
     top: 0;
     left: 0;
     margin-bottom: 10px;
+    z-index: 1;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 }
