@@ -25,17 +25,17 @@ class User(UserMixin,db.Model):
     is_superuser = db.Column(db.Boolean, default=False)
 
     # detailed
-    photo_path = db.Column(db.String(60))
-    fullname = db.Column(db.String(60))
+    photo_path = db.Column(db.String(60))#
+    fullname = db.Column(db.String(60))#
     dob = db.Column(db.DateTime)  # Date Of Birth
     pob = db.Column(db.String(60))  # PlaceOfBirth
     joined = db.Column(db.DateTime, default=datetime.now())
-    association = db.Column(db.String(60))
-    license_no = db.Column(db.String(60))
+    association = db.Column(db.String(60))#
+    license_no = db.Column(db.String(60))#
     gender = db.Column(db.Integer)
     mmn = db.Column(db.String(60))  # MothersMaidenNAme
-    address = db.Column(db.String(120))
-    phone_no = db.Column(db.String(25))
+    address = db.Column(db.String(120))#
+    phone_no = db.Column(db.String(25))#
     lic_type = db.Column(db.Integer)
 
 

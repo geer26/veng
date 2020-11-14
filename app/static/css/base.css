@@ -89,6 +89,7 @@ body{
 
 /* MODAL STYLES */
 
+
 .modalback{
     display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -162,4 +163,22 @@ body{
     max-width: 4vmax;
     top: -1.5vmax;
     right: -1.5vmax;
+}
+
+
+/* ADDUSER MODAL ELEMENTS */
+
+.adu_img{
+    width: 8vw;
+    height: 8vw;
+    position: absolute;
+    top: 1vh;
+    left: 5vh;
+    border-radius: 5px;
+    transition: .2s;
+}
+
+.adu_img:hover{
+    width: 9vw;
+    height: 9vw;
 }

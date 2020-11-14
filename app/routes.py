@@ -124,6 +124,28 @@ def newmessage(data):
         return True
 
 
+    #delete user - DONE
+    if data['event'] == 222 and current_user.is_superuser:
+        u = User.query.get(int(data['id']))
+        if u:
+            db.session.delete(u)
+            db.session.commit()
+            mess = {}
+            mess['event'] = 122
+            mess['id'] = int(data['id'])
+            socket.emit('newmessage', mess, room=sid)
+            return True
+        else:
+            #user do not exists
+            return False
+
+
+    #register for new user
+    if data['event'] == 231 and current_user.is_superuser:
+        print(data)
+        return True
+
+
 #-------------------------------------------- dev ops --------------------------------------
 
 

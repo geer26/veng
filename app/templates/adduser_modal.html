@@ -4,20 +4,54 @@
 
         <img class="close_btn" draggable="false" src="/static/img/icons/close.png" id="close_modal" onclick="closemodal('adduser_modal')">
 
-        <h6>Felhasználó regisztrálása</h6>
+        <p>Regisztráció</p>
 
-        <div>
+        <div id="addu_data col s8 m8"
+             style="position: absolute: display: inline-block; relative; block; border: 1px solid yellow; padding: 5px; width: 70vw; margin-top: 7vh;">
 
-            <div>
-                <img id="adduser_img" style="width: 8vw; height: 8vw; position: relative; left: 5px; border-radius: 5px;"
+            <img id="adduser_img" class="adu_img"
                      src="/static/img/avatars/a_unknown.png" onclick="req_for_aselector()">
+
+            <div class="input-field amber-text" style="width: 45%; display: inline-block;">
+                <input id="fullname" type="text" class="validate">
+                <label for="fullname">Teljes név</label>
             </div>
 
-        </div>
+            <div class="input-field amber-text" style="width: 45%; display: inline-block;">
+                <input id="mmn" type="text" class="validate">
+                <label for="mmn">Anyja neve</label>
+            </div>
 
-        <button class="waves-effect waves-light btn btn-small" style="border-radius: 2px;" id="loginbutton" onclick="try_login()">
-            regisztrálás
-        </button>
+            <div class="input-field" style="width: 45%; display: inline-block;">
+                <input id="email" type="text" class="validate">
+                <label for="email">Email cím</label>
+            </div>
+
+            <div class="input-field" style="width: 45%; display: inline-block;">
+                <input id="phone" type="text" class="validate">
+                <label for="phone">Telefonszám</label>
+            </div>
+
+            <div class="input-field" style="width: 90%; display: inline-block;">
+                <input id="address" type="text" class="validate">
+                <label for="address">Lakcím</label>
+            </div>
+
+            <div class="input-field" style="width: 45%; display: inline-block;">
+                <input id="associaton" type="text" class="validate">
+                <label for="associaton">Egyesület</label>
+            </div>
+
+            <div class="input-field" style="width: 45%; display: inline-block;">
+                <input id="lic_no" type="text" class="validate">
+                <label for="lic_no">Engedély száma</label>
+            </div>
+
+            <button class="waves-effect waves-light btn btn-small" style="border-radius: 2px;" id="loginbutton" onclick="register()">
+            regisztráció
+            </button>
+
+        </div>
 
     </div>
 

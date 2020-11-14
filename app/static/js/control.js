@@ -23,6 +23,7 @@ socket.on('newmessage', function(data){
         case 302:{
             $('#mainpage').append(data['htm']);
             };
+
             break;
 
 
@@ -46,6 +47,20 @@ socket.on('newmessage', function(data){
         case 121:{
             $('#loginform').submit();
             }
+            break;
+
+        //user deleted, remove from list
+        case 122:{
+            $('#'+data['id'].toString()).remove();
+            };
+            break;
+
+
+        //Registration OK, close the modal
+        case 131:{
+            $('#adduser_modal').remove();
+            //refresh p id="table_users"
+            };
             break;
 
     }
@@ -134,6 +149,37 @@ function req_for_addumodal(){
 };
 
 
+function deluser(id){
+    var message = {event: 222, id: id};
+    send_message(message);
+};
+
+
+function register(){
+    console.log('REGISTER!');
+    var fullname = $('#fullname').val();
+    var mmn = $('#mmn').val();
+    var email = $('#email').val();
+    var phone = $('#phone').val();
+    var address = $('#address').val();
+    var associaton = $('#associaton').val();
+    var lic_no = $('#lic_no').val();
+    var ph_pa = $('#adduser_img').attr('src');
+    var message = {
+        event: 231,
+        fullname: fullname,
+        mmn: mmn,
+        email: email,
+        phone: phone,
+        address: address,
+        associaton: associaton,
+        lic_no: lic_no,
+        photo_path: ph_pa
+        };
+    send_message(message);
+};
+
+
 //------------------- dev ops ------------------------
 var edit_user = 0
 
@@ -146,6 +192,13 @@ function req_for_aselector(){
 
 function showuri(img){
     var newsrc = $(img).attr('src').toString();
-    $('#useravatar_'+edit_user.toString()).attr( 'src', newsrc );
+
+    if( $('#adduser_modal').length ){
+        $('#adduser_img').attr( 'src', newsrc );
+    }
+    else{
+        $('#useravatar_'+edit_user.toString()).attr( 'src', newsrc );
+    }
+
     closemodal('avatarmodal');
 };

@@ -28,7 +28,7 @@
                 {% endif %}
                 {{user.username}}
                 {%if not user.is_superuser or user.username != current_user.username%}
-                <a class="btn-floating btn-small waves-effect waves-light red " onclick="deluser(this)">
+                <a class="btn-floating btn-small waves-effect waves-light red " onclick="deluser({{user.id}})">
                     <i class="tiny material-icons">delete</i>
                 </a>
                 {%endif%}
