@@ -142,13 +142,26 @@ def newmessage(data):
 
     #register for new user
     if data['event'] == 231 and current_user.is_superuser:
-        print(data)
         r = userregister(data)
-        if r == 0:
+        if r == 1:
+            mess = {}
+            mess['event'] = 109
+            mess['htm'] = render_template('errormessage.html', message='Rossz email cím formátum!')
+            socket.emit('newmessage', mess, room=sid)
+            return False
+
+        elif r == 2:
+            mess = {}
+            mess['event'] = 109
+            mess['htm'] = render_template('errormessage.html', message='Rossz telefonszám formátum!')
+            socket.emit('newmessage', mess, room=sid)
+            return False
+
+        elif r == 0:
             mess= {}
             mess['event'] = 131
             socket.emit('newmessage', mess, room=sid)
-        return True
+            return True
 
 
     #request for usertable refreshment

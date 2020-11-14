@@ -15,7 +15,7 @@ socket.on('newmessage', function(data){
 
         case 301:{
             $('#mainpage').append(data['htm']);
-            }
+            };
             break;
 
 
@@ -32,21 +32,21 @@ socket.on('newmessage', function(data){
         //incoming login modal!
         case 101:{
             $('#mainpage').append(data['htm']);
-            }
+            };
             break;
 
 
         //error message!
         case 109:{
             $('#mainpage').append(data['htm']);
-            }
+            };
             break;
 
 
         //login data are OK, submit the form
         case 121:{
             $('#loginform').submit();
-            }
+            };
             break;
 
         //user deleted, remove from list
@@ -59,16 +59,15 @@ socket.on('newmessage', function(data){
         //Registration OK, close the modal
         case 131:{
             $('#adduser_modal').remove();
-            //refresh p id="table_users"
-            var message = {event: 251, id: id};
+            var message = {event: 251};
             send_message(message);
             };
             break;
 
 
         //incoming usertable refreshment
-        case: 151:{
-            $('#table_users').empty();
+        case 151:{
+            $('#utable').remove();
             $('#table_users').append(data['htm']);
             };
             break;
@@ -165,8 +164,7 @@ function deluser(id){
 };
 
 
-function register(){
-    console.log('REGISTER!');
+function register_u(){
     var fullname = $('#fullname').val();
     var mmn = $('#mmn').val();
     var email = $('#email').val();
@@ -175,6 +173,12 @@ function register(){
     var associaton = $('#associaton').val();
     var lic_no = $('#lic_no').val();
     var ph_pa = $('#adduser_img').attr('src');
+    var gender = $('#u_gender').is(':checked')
+    if (!fullname || !mmn || !email || !phone || !address || !associaton || !lic_no || !ph_pa){
+        var message = {event: 209, message: 'Minden mező kitöltése kötelező!'};
+        send_message(message);
+        return;
+        }
     var message = {
         event: 231,
         fullname: fullname,
@@ -184,9 +188,11 @@ function register(){
         address: address,
         associaton: associaton,
         lic_no: lic_no,
-        photo_path: ph_pa
+        photo_path: ph_pa,
+        gender: gender
         };
     send_message(message);
+    return;
 };
 
 
@@ -201,6 +207,7 @@ function req_for_aselector(){
 
 
 function showuri(img){
+
     var newsrc = $(img).attr('src').toString();
 
     if( $('#adduser_modal').length ){
