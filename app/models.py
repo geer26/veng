@@ -27,7 +27,7 @@ class User(UserMixin,db.Model):
     # detailed
     photo_path = db.Column(db.String(60))#
     fullname = db.Column(db.String(60))#
-    dob = db.Column(db.DateTime)  # Date Of Birth
+    dob = db.Column(db.DateTime, default=datetime.now())  # Date Of Birth
     pob = db.Column(db.String(60))  # PlaceOfBirth
     joined = db.Column(db.DateTime, default=datetime.now())
     association = db.Column(db.String(60))#

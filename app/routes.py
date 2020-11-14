@@ -38,12 +38,18 @@ def index():
             return redirect('/')
 
     elif current_user.is_authenticated and current_user.is_superuser:
-        users = User.query.order_by(User.username).all()
+        users = User.query.order_by(User.id).all()
 
         return render_template('index2.html', title='Index', users=users)
 
     else:
         return render_template('index2.html', title='Index')
+
+
+@app.route('/user/<uuid>')
+def userdata(uuid):
+    user = User.query.get(uuid=uuid)
+    return render_template('userdata.html', user=user)
 
 
 #logs out user - DONE
@@ -70,8 +76,7 @@ def addsu(suname, password):
         user.set_password(password)
         user.is_superuser = True
         user.joined = date.today()
-        user.last_activity = datetime.now()
-        user.fullname = generate_rnd(12)
+        user.fullname = 'Administrator'
         user.address = generate_rnd(12)
         user.association = generate_rnd(12)
         user.mmn = generate_rnd(12)

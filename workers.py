@@ -12,15 +12,8 @@ def validate_email(email):
     return (re.search(pattern, email))
 
 
-def random_date(start, end):
-    """
-    This function will return a random datetime between two datetime
-    objects.
-    """
-    delta = end - start
-    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
-    random_second = randrange(int_delta)
-    return start + timedelta(seconds=random_second)
+def rdate(start, end):
+    return datetime.fromtimestamp(randrange(start,end))
 
 
 def hassu():
@@ -51,6 +44,7 @@ def userregister(data):
 
     user = User()
 
+    user.fullname = data['fullname']
     #Randomized!
     user.username = generate_rnd(5)
     # Randomized!
@@ -61,7 +55,7 @@ def userregister(data):
     user.is_superuser = False
     user.photo_path = data['photo_path']
     # Randomized!
-    user.dob = random_date(date(1980, 1, 1), date(2000, 1, 1))
+    user.dob = rdate( datetime.timestamp( datetime(1980, 1, 1) ), datetime.timestamp( datetime(2000,1,1)) )
     user.joined = datetime.today()
     user.association = data['associaton']
     # Randomized!

@@ -169,8 +169,8 @@ body{
 /* ADDUSER MODAL ELEMENTS */
 
 .adu_img{
-    width: 8vw;
-    height: 8vw;
+    width: 8vmax;
+    height: 8vmax;
     position: absolute;
     top: 1vh;
     left: 5vh;

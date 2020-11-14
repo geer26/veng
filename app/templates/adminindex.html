@@ -1,7 +1,8 @@
 
 <div class="">
 
-    <div class="carousel carousel-slider center" style="max-height: 85vh; border: 2px solid blue; overflow: auto;" id="admincarousel">
+    <div class="carousel carousel-slider center" style="max-height: 85vh; border: 2px solid red; overflow-y: scroll; display: inline-block"
+         id="admincarousel">
 
         <div id="prevslide" style="left: 0; border-top-right-radius: 5px; border-bottom-right-radius: 5px;"
             onclick="uc_prev()" class="valign-wrapper car_nav">
@@ -32,7 +33,7 @@
 
     </div>
 
-  <script>
+  <script type="text/javascript">
       var car = $('.carousel.carousel-slider').carousel({
         fullWidth: true
         //indicators: true,
