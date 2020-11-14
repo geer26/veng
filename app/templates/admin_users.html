@@ -6,7 +6,6 @@
             <th>Felhasználónév</th>
             <th>Email</th>
             <th>Csatlakozás dátuma</th>
-            <th>Utoljára aktív</th>
         </tr>
     </thead>
 
@@ -37,7 +36,7 @@
 
             <td>{{user.email}}</td>
 
-            <td>{{user.joined}}</td>
+            <td>{{user.joined.strftime("%Y. %b. %d.")}}</td>
 
             <td>{{user.last_activity}}</td>
 
@@ -68,7 +67,7 @@
                     </p>
 
                     <p>
-                        Születési idő:
+                        Születési idő: "{{user.dob}}"
                     </p>
 
                 </div>
