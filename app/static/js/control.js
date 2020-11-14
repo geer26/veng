@@ -60,6 +60,16 @@ socket.on('newmessage', function(data){
         case 131:{
             $('#adduser_modal').remove();
             //refresh p id="table_users"
+            var message = {event: 251, id: id};
+            send_message(message);
+            };
+            break;
+
+
+        //incoming usertable refreshment
+        case: 151:{
+            $('#table_users').empty();
+            $('#table_users').append(data['htm']);
             };
             break;
 

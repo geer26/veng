@@ -8,7 +8,7 @@ from app import app, socket, db
 from app.forms import LoginForm
 from app.models import User
 
-from workers import hassu, canlogin, generate_rnd
+from workers import hassu, canlogin, generate_rnd, userregister
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -143,6 +143,21 @@ def newmessage(data):
     #register for new user
     if data['event'] == 231 and current_user.is_superuser:
         print(data)
+        r = userregister(data)
+        if r == 0:
+            mess= {}
+            mess['event'] = 131
+            socket.emit('newmessage', mess, room=sid)
+        return True
+
+
+    #request for usertable refreshment
+    if data['event'] == 251 and current_user.is_authenticated:
+        users = User.query.order_by(User.username).all()
+        mess = {}
+        mess['event'] = 151
+        mess['htm'] = render_template('admin_users.html', users=users)
+        socket.emit('newmessage', mess, room=sid)
         return True
 
 

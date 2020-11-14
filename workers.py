@@ -17,3 +17,7 @@ def canlogin(data):
 
 def generate_rnd(N):
     return ''.join(SystemRandom().choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(N))
+
+
+def userregister(data):
+    return 0
