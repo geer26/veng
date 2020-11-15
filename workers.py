@@ -1,7 +1,5 @@
 import re
 import string
-import pyqrcode
-
 from datetime import datetime
 from random import SystemRandom, randrange
 
@@ -87,10 +85,6 @@ def userregister(data):
 def generateQR(data):
 
     URL=str(data['domain'])+'/'+str(data['uuid'])
-    #print(URL)
-
-    qr = pyqrcode.create(URL)
-    qr.svg('uca.svg', scale=4, module_color="#ffffff")
 
     return
 
