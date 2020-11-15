@@ -167,6 +167,7 @@ function deluser(id){
 function register_u(){
     var fullname = $('#fullname').val();
     var mmn = $('#mmn').val();
+    var pob = $('#pob').val();
     var email = $('#email').val();
     var phone = $('#phone').val();
     var address = $('#address').val();
@@ -174,7 +175,7 @@ function register_u(){
     var lic_no = $('#lic_no').val();
     var ph_pa = $('#adduser_img').attr('src');
     var gender = $('#u_gender').is(':checked')
-    if (!fullname || !mmn || !email || !phone || !address || !associaton || !lic_no || !ph_pa){
+    if (!fullname || !mmn || !email || !phone || !address || !associaton || !lic_no || !ph_pa || !pob){
         var message = {event: 209, message: 'Minden mező kitöltése kötelező!'};
         send_message(message);
         return;
@@ -183,6 +184,7 @@ function register_u(){
         event: 231,
         fullname: fullname,
         mmn: mmn,
+        pob: pob,
         email: email,
         phone: phone,
         address: address,
@@ -193,6 +195,18 @@ function register_u(){
         };
     send_message(message);
     return;
+};
+
+
+function req_qr(uuid){
+    if (!$('#domain').val()){
+        var message = {event: 209, message: 'Adja meg a domain-t!'};
+        send_message(message);
+        return;
+        };
+    var message = {event: 261, uuid:uuid, domain: $('#domain').val()};
+    send_message(message);
+    return
 };
 
 

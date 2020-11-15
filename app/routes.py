@@ -2,13 +2,12 @@ from datetime import date, datetime
 
 from flask import render_template, redirect, request
 from flask_login import current_user, login_user, logout_user, login_required
-from sqlalchemy import desc
 
 from app import app, socket, db
 from app.forms import LoginForm
 from app.models import User
 
-from workers import hassu, canlogin, generate_rnd, userregister
+from workers import hassu, canlogin, generate_rnd, userregister, generateQR
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -176,6 +175,12 @@ def newmessage(data):
         mess['event'] = 151
         mess['htm'] = render_template('admin_users.html', users=users)
         socket.emit('newmessage', mess, room=sid)
+        return True
+
+
+    #request for QR
+    if data['event'] == 261 and current_user.is_superuser:
+        modal = generateQR(data)
         return True
 
 

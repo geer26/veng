@@ -32,7 +32,7 @@
                     <i class="tiny material-icons">delete</i>
                 </a>
 
-                <a class="btn-floating btn-small waves-effect waves-light amber darken-3" onclick="" style="margin-left: 3px;">
+                <a class="btn-floating btn-small waves-effect waves-light amber darken-3" onclick="req_qr('{{user.uuid}}')" style="margin-left: 3px;">
                     <i class="tiny material-icons">qr_code_2</i>
                 </a>
 
@@ -43,8 +43,6 @@
             <td>{{user.email}}</td>
 
             <td>{{user.joined.strftime("%Y. %b. %d.")}}</td>
-
-            <td>{{user.last_activity}}</td>
 
         </tr>
 

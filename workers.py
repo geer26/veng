@@ -1,10 +1,13 @@
 import re
 import string
-from datetime import timedelta, date, datetime
-from random import random, SystemRandom, randrange
+import pyqrcode
+
+from datetime import datetime
+from random import SystemRandom, randrange
 
 from app import db
 from app.models import User
+
 
 
 def validate_email(email):
@@ -19,6 +22,7 @@ def rdate(start, end):
 def hassu():
     return False
 
+
 def canlogin(data):
     username = str(data['username'])
     password = str(data['password'])
@@ -26,6 +30,7 @@ def canlogin(data):
     if not u: return False
     if not u.check_password(password): return False
     return True
+
 
 def generate_rnd(N):
     return ''.join(SystemRandom().choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(N))
@@ -56,6 +61,7 @@ def userregister(data):
     user.photo_path = data['photo_path']
     # Randomized!
     user.dob = rdate( datetime.timestamp( datetime(1980, 1, 1) ), datetime.timestamp( datetime(2000,1,1)) )
+    user.pob = data['pob']
     user.joined = datetime.today()
     user.association = data['associaton']
     # Randomized!
@@ -76,3 +82,15 @@ def userregister(data):
     db.session.commit()
 
     return 0
+
+
+def generateQR(data):
+
+    URL=str(data['domain'])+'/'+str(data['uuid'])
+    #print(URL)
+
+    qr = pyqrcode.create(URL)
+    qr.svg('uca.svg', scale=4, module_color="#ffffff")
+
+    return
+
