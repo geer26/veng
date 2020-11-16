@@ -183,7 +183,7 @@ def newmessage(data):
         user = User.query.filter_by(uuid=data['uuid']).first()
         mess ={}
         mess['event']=161
-        mess['htm'] = render_template('qrcode.html', url=str(data['domain'])+'/'+str(data['uuid']), user=user)
+        mess['htm'] = render_template('qrcode.html', url=str(data['domain'])+'/user/'+str(data['uuid']), user=user)
         socket.emit('newmessage', mess, room=sid)
         return True
 

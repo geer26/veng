@@ -236,3 +236,7 @@ function showuri(img){
 
     closemodal('avatarmodal');
 };
+
+function showdatasheet(uuid){
+    console.log(uuid);
+};
