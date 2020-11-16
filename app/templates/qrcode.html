@@ -1,15 +1,1 @@
-<canvas src=”{{ qrcode(url) }}” id="qrcode">
-
-</canvas>
-
-<canvas id="canvas" width="500" height="500">your canvas loads here</canvas>
-
-<script>
-    var canvas=document.getElementById("canvas");
-    var context=canvas.getContext('2d');
-    var image=new Image();
-image.onload=function(){
-context.drawImage(image,0,0,canvas.width,canvas.height);
-};
-image.src="http://www.lunapic.com/editor/premade/transparent.gif";
-</script>
+<img src={{ qrcode(url) }} id="qrcode">
