@@ -65,6 +65,8 @@ def userregister(data):
     # Randomized!
     user.lic_type = generate_rnd(4)
     user.license_no = data['lic_no']
+    # Randomized
+    user.license_exp = rdate( datetime.timestamp(datetime(2020, 12, 30)) , datetime.timestamp( datetime(2025,1,1)) )
     if data['gender']:
         #Woman
         user.gender = 2

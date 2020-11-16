@@ -180,9 +180,10 @@ def newmessage(data):
 
     #request for QR
     if data['event'] == 261 and current_user.is_superuser:
-        mess = {}
+        user = User.query.filter_by(uuid=data['uuid']).first()
+        mess ={}
         mess['event']=161
-        mess['htm'] = render_template('qrcode.html', url=str(data['domain'])+'/'+str(data['uuid']))
+        mess['htm'] = render_template('qrcode.html', url=str(data['domain'])+'/'+str(data['uuid']), user=user)
         socket.emit('newmessage', mess, room=sid)
         return True
 

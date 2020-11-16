@@ -18,7 +18,7 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     #login and register
-    uuid = db.Column(db.String(12), index=True)
+    uuid: str = db.Column(db.String(12), index=True)
     username = db.Column(db.String(12), index=True, unique=True)
     email = db.Column(db.String(60), index=True, unique=True)
     password_hash = db.Column(db.String(256))
@@ -32,6 +32,7 @@ class User(UserMixin,db.Model):
     joined = db.Column(db.DateTime, default=datetime.now())
     association = db.Column(db.String(60))#
     license_no = db.Column(db.String(60))#
+    license_exp = db.Column(db.DateTime, default=datetime.now())
     gender = db.Column(db.Integer)
     mmn = db.Column(db.String(60))  # MothersMaidenNAme
     address = db.Column(db.String(120))#

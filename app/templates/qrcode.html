@@ -1,1 +1,47 @@
-<img src={{ qrcode(url) }} id="qrcode">
+
+
+<div id="idcard" class="modalback">
+
+    <div class="addm_frame" id="idcard_frame">
+
+        <img class="close_btn" draggable="false" src="/static/img/icons/close.png" id="close_modal" onclick="closemodal('idcard')">
+
+        <h6>Versenyengedély</h6>
+
+        <div class="row">
+
+            <div style="display: inline-block; width: 8vmin; height: 8vmin;">
+                <img src={{ qrcode(url) }} id="qrcode" style="width:100%; height: 100%; border-radius: 5px">
+            </div>
+
+            <div style="display: inline-block; width: 24vmin; height: 24vmin; font-size: 70%;" class="flow-text">
+                <p style="display: inline-block;">
+                    Száma: {{user.license_no}}
+                </p>
+                <p style="display: inline-block;">
+                    Érvényessége: {{user.license_exp.strftime("%Y. %b. %d.")}}
+                </p>
+            </div>
+
+            <div style="display: inline-block; width: 8vmin; height: 8vmin;">
+                <img style="width:100%; height: 100%; border-radius: 5px"
+                     src="{{user.photo_path}}">
+            </div>
+
+            <br>
+
+            <p style="display: inline-block; margin: 0; text-align:left;">
+                Kártyabirtokos neve: {{user.fullname}}
+            </p>
+
+            <br>
+
+            <p style="display: inline-block; margin: 0; text-align:left;">
+                Kártyabirtokos születési ideje: {{user.dob.strftime("%Y. %b. %d.")}}
+            </p>
+
+
+
+        </div>
+
+</div>
