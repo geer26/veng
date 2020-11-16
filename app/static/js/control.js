@@ -207,7 +207,6 @@ function register_u(){
 
 function req_qr(uuid){
     var domain = location.host;
-    console.log(domain);
     var message = {event: 261, uuid: uuid, domain: domain};
     send_message(message);
     return
