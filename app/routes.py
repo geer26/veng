@@ -184,6 +184,7 @@ def newmessage(data):
         mess['event']=161
         mess['htm'] = render_template('qrcode.html', url=str(data['domain'])+'/'+str(data['uuid']))
         print(mess['htm'])
+        socket.emit('newmessage', mess, room=sid)
         return True
 
 

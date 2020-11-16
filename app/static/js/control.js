@@ -72,6 +72,13 @@ socket.on('newmessage', function(data){
             };
             break;
 
+
+        //incoming QR table
+        case 161:{
+            $('#mainpage').append(data['htm']);
+            };
+            break;
+
     }
 
 });
@@ -199,12 +206,9 @@ function register_u(){
 
 
 function req_qr(uuid){
-    if (!$('#domain').val()){
-        var message = {event: 209, message: 'Adja meg a domain-t!'};
-        send_message(message);
-        return;
-        };
-    var message = {event: 261, uuid:uuid, domain: $('#domain').val()};
+    var domain = location.host;
+    console.log(domain);
+    var message = {event: 261, uuid: uuid, domain: domain};
     send_message(message);
     return
 };
