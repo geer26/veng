@@ -47,7 +47,7 @@ def index():
 
 @app.route('/user/<uuid>')
 def userdata(uuid):
-    user = User.query.get(uuid=uuid)
+    user = User.query.filter_by(uuid=str(uuid)).first()
     return render_template('userdata.html', user=user)
 
 
