@@ -82,9 +82,3 @@ def userregister(data):
     return 0
 
 
-def generateQR(data):
-
-    URL=str(data['domain'])+'/'+str(data['uuid'])
-
-    return
-

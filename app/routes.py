@@ -3,11 +3,11 @@ from datetime import date, datetime
 from flask import render_template, redirect, request
 from flask_login import current_user, login_user, logout_user, login_required
 
-from app import app, socket, db
+from app import app, socket, db, qr
 from app.forms import LoginForm
 from app.models import User
 
-from workers import hassu, canlogin, generate_rnd, userregister, generateQR
+from workers import hassu, canlogin, generate_rnd, userregister
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -180,7 +180,10 @@ def newmessage(data):
 
     #request for QR
     if data['event'] == 261 and current_user.is_superuser:
-        modal = generateQR(data)
+        mess = {}
+        mess['event']=161
+        mess['htm'] = render_template('qrcode.html', url=str(data['domain'])+'/'+str(data['uuid']))
+        print(mess['htm'])
         return True
 
 

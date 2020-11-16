@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_socketio import SocketIO
+from flask_qr import QR
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
@@ -18,5 +19,6 @@ socket = SocketIO(app)
 
 login = LoginManager(app)
 
+qr = QR(app, mode="google")
 
 from app import routes,models
